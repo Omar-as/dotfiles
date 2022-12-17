@@ -22,5 +22,8 @@
 		openconnect
 		slack
 		git
+		discord
+		jetbrains.idea-ultimate	
+		racket
 	];
 }
