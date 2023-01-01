@@ -25,5 +25,8 @@
 		discord
 		jetbrains.idea-ultimate	
 		racket
+		jetbrains.pycharm-professional
+		gnome.gnome-tweaks
+  		gnome-extension-manager
 	];
 }
