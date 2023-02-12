@@ -61,7 +61,6 @@
 		kitty
 		libreoffice
 		zoom-us	
-		openconnect
 		slack
 		git
 		discord
@@ -71,5 +70,7 @@
 		gnome.gnome-tweaks
   		gnome-extension-manager
 		alacritty
+		gimp
+		openconnect
 	];
 }
