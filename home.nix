@@ -7,6 +7,19 @@
 	home.stateVersion = "22.05";
 
 	programs.home-manager.enable = true;
+
+	programs.bash.enable = true;
+
+	programs.direnv = {
+	    enable = true;
+	    enableBashIntegration = true;
+	    # Enabled by default
+	    # enableFishIntegration = true;
+	    enableZshIntegration = true;
+	    nix-direnv = {
+	      enable = true;
+	    };
+	  };
 	
 	programs.fish = {
 	
