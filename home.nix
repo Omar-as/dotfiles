@@ -64,7 +64,75 @@
   
 
 	};
-	programs.neovim.enable = true;
+	programs.neovim = {
+	    enable = true;
+	    plugins = with pkgs.vimPlugins; [
+		plenary-nvim # Required by many packages
+
+		# Themes
+		neovim-ayu
+	      	nord-nvim
+	      	dracula-vim
+	      	gruvbox-nvim
+	      	onehalf
+
+		# Version Control
+		gitsigns-nvim
+		vim-fugitive
+		vim-rhubarb
+
+		# TreeSitter
+		(nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+		
+		nvim-ts-context-commentstring
+		indent-blankline-nvim
+		
+		# LSP
+		mason-nvim
+		nvim-lspconfig
+      		nvim-cmp
+      		cmp-nvim-lsp
+      		cmp-path
+      		cmp-cmdline
+      		cmp-buffer
+      		cmp-nvim-lua
+      		cmp-nvim-ultisnips
+      		fidget-nvim
+		luasnip
+		cmp_luasnip
+		fidget-nvim
+
+		# Telescope
+		telescope-nvim
+      		telescope-fzf-native-nvim
+		
+		# Other
+		vim-sleuth
+		comment-nvim
+		lualine-nvim
+		neodev-nvim
+	    ];
+
+	    extraPackages = with pkgs; [
+      	    	# Telescope
+      	    	ripgrep
+      	    	fd
+
+      	    	# Language Servers
+      	    	rnix-lsp
+      	    	pyright
+      	    	yaml-language-server
+      	    	ccls
+      	    	rust-analyzer
+      	    	nodePackages.bash-language-server
+      	    	nodePackages.vim-language-server
+      	    	nodePackages.vscode-langservers-extracted
+      	    	nodePackages.typescript-language-server
+      	    	nodePackages.diagnostic-languageserver
+      	    	sumneko-lua-language-server
+      	    	texlab
+	    ];	    
+	};
 
 	home.packages = with pkgs; [ 
 		btop
@@ -85,5 +153,6 @@
 		alacritty
 		gimp
 		openconnect
+		vlc
 	];
 }
