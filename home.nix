@@ -154,5 +154,6 @@
 		gimp
 		openconnect
 		vlc
+		sshfs
 	];
 }
