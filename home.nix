@@ -89,6 +89,7 @@
 		
 		# LSP
 		mason-nvim
+		mason-lspconfig-nvim
 		nvim-lspconfig
       		nvim-cmp
       		cmp-nvim-lsp
@@ -155,5 +156,8 @@
 		openconnect
 		vlc
 		sshfs
+		firefox
+		unzip
+		pdftk
 	];
 }
