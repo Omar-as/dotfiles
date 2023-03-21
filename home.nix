@@ -69,12 +69,16 @@
 	    plugins = with pkgs.vimPlugins; [
 		plenary-nvim # Required by many packages
 
+		vim-nix
+		nvim-comment
+		neogit
+		ultisnips
+
 		# Themes
 		neovim-ayu
 	      	nord-nvim
 	      	dracula-vim
 	      	gruvbox-nvim
-	      	onehalf
 
 		# Version Control
 		gitsigns-nvim
@@ -88,8 +92,6 @@
 		indent-blankline-nvim
 		
 		# LSP
-		mason-nvim
-		mason-lspconfig-nvim
 		nvim-lspconfig
       		nvim-cmp
       		cmp-nvim-lsp
@@ -108,6 +110,9 @@
       		telescope-fzf-native-nvim
 		
 		# Other
+		dashboard-nvim
+		lualine-nvim
+    		nvim-web-devicons
 		vim-sleuth
 		comment-nvim
 		lualine-nvim
@@ -122,16 +127,8 @@
       	    	# Language Servers
       	    	rnix-lsp
       	    	pyright
-      	    	yaml-language-server
       	    	ccls
-      	    	rust-analyzer
-      	    	nodePackages.bash-language-server
-      	    	nodePackages.vim-language-server
-      	    	nodePackages.vscode-langservers-extracted
-      	    	nodePackages.typescript-language-server
-      	    	nodePackages.diagnostic-languageserver
-      	    	sumneko-lua-language-server
-      	    	texlab
+		lua-language-server
 	    ];	    
 	};
 
@@ -159,5 +156,8 @@
 		firefox
 		unzip
 		pdftk
+		obs-studio
+		teams
+		vscode
 	];
 }
