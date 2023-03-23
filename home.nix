@@ -159,5 +159,6 @@
 		obs-studio
 		teams
 		vscode
+		brave
 	];
 }
