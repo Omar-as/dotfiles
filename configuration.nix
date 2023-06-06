@@ -1,14 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -38,14 +39,14 @@
 
   # Low Power Enable
   services.upower = {
-      enable = true;
-      usePercentageForPolicy = true;
-      percentageLow = 40;
-      percentageCritical = 20;
-      percentageAction = 10;
-      criticalPowerAction = "Hibernate";
-    };
-  
+    enable = true;
+    usePercentageForPolicy = true;
+    percentageLow = 40;
+    percentageCritical = 20;
+    percentageAction = 10;
+    criticalPowerAction = "Hibernate";
+  };
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -84,7 +85,7 @@
     createHome = true;
     isNormalUser = true;
     description = "omar";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.fish;
   };
 
@@ -95,8 +96,8 @@
   # $ nix search wget
 
   nix = {
-	package = pkgs.nixFlakes;
-	extraOptions = "experimental-features = nix-command flakes";
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -127,8 +128,8 @@
   system.stateVersion = "22.05"; # Did you read the comment?
 
   nix.gc = {
-  automatic = true;
-  dates = "weekly";
-  options = "--delete-older-than 90d";
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 90d";
   };
 }
