@@ -166,7 +166,6 @@
     unzip
     pdftk
     obs-studio
-    teams
     vscode
     brave
     spotify
