@@ -68,6 +68,9 @@
   };
   programs.neovim = {
     enable = true;
+    extraConfig = ''
+      luafile ${nvim/nvim.lua}
+      '';
     plugins = with pkgs.vimPlugins; [
       plenary-nvim # Required by many packages
 
