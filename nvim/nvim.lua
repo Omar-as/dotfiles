@@ -1,3 +1,4 @@
+--require 'plugins.init'
 local opt = vim.opt
 local g = vim.g
 
@@ -7,28 +8,57 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+vim.opt.background = "dark"
 vim.cmd [[ 
     set nowrap
     set ignorecase
     set noswapfile
     set noerrorbells
+    set signcolumn=yes
+    set guicursor=n-v-c-i:block
     set backspace=indent,eol,start
 
-    colorscheme dracula
+    colorscheme oxocarbon
     let g:mkdp_auto_start=1
-    set signcolumn=yes
+    highlight IndentBlanklineIndent guifg=#E06C75 gui=nocombine
 
     map ; :
 ]]
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 
 g.mapleader = ' '
+if g.neovide then
+    g.neovide_scale_factor = 0.5
+    g.neovide_transparency = 0.94
+    g.transparency = 0.0
+    g.neovide_background_color = '#222330'..math.floor(255 * g.neovide_transparency)
+
+else
+    vim.api.nvim_set_hl(0,"Normal", { bg = "none"})
+    vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none"})
+    -- require("transparent").setup({
+    --   enable = true,
+    --   extra_groups =
+    --   {
+    --     "BufferLineTabClose",
+    --     "BufferlineBufferSelected",
+    --     "BufferLineFill",
+    --     "BufferLineBackground",
+    --     "BufferLineSeparator",
+    --     "BufferLineIndicatorSelected",
+    --   },
+    --   exclude = {}, -- table: groups you don't want to clear
+    -- })
+end
 
 opt.smartindent = true
 opt.autoindent = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
+opt.termguicolors = true
 
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
@@ -48,11 +78,17 @@ function _G.check_back_space()
     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
-require('neogit').setup{}
-
-require('lualine').setup{
-    options = {theme = "dracula"}
+ require('lualine').setup{
+    options = {theme = "oxocarbon-nvim"}
 }
+
+--require("indent_blankline").setup {
+--    -- for example, context is off by default, use this to turn it on
+--    show_current_context = true,
+--    show_current_context_start = true,
+--    show_trailing_blankline_indent = false,
+--    char_highlight_list = {"IndentBlanklineIndent"},
+--}
 
 -- require("bufferline").setup{}
 
@@ -65,24 +101,6 @@ require('nvim_comment').setup({
     , line_mapping = "<leader>lc", operator_mapping = "<leader>c", comment_chunk_text_object = "ic"
 })
 
-
-require('gitsigns').setup {
-	signs = {
-		add = { text = '+' },
-		change = { text = '~' },
-        	delete = { text = '_' },
-        	topdelete = { text = '‾' },
-        	changedelete = { text = '~' },
-	},
-}
-
-
-require("indent_blankline").setup {
-    show_end_of_line = true,
-    space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = true,
-}
 
 
 -- require'nvim-treesitter.configs'.setup{
@@ -97,6 +115,93 @@ vim.keymap.set('n', 'fg', builtin.live_grep, {})
 vim.keymap.set('n', 'fb', builtin.buffers, {})
 vim.keymap.set('n', 'fo', builtin.oldfiles, {})
 
+local db = require("dashboard")
+local conf = {}
+conf.custom_center = {
+	{
+		icon = "  ",
+		desc = "Find files                              ",
+		action = "Telescope find_files find_command=rg,--hidden,--files",
+		shortcut = "SPC f f",
+	},
+	{
+		icon = "  ",
+		desc = "Find word                               ",
+		action = "Telescope live_grep",
+		shortcut = "SPC f g",
+	},
+	{
+		icon = "  ",
+		desc = "Find recent files                       ",
+		action = "Telescope oldfiles",
+		shortcut = "SPC f o",
+	},
+	{
+		icon = "  ",
+		desc = "Load new theme                          ",
+		action = "Telescope colorscheme",
+	},
+}
+conf.header = {
+    "     ░░                                                  ░░    ",
+    "     ████                                              ████    ",
+    "     ██▓▓██                                          ██  ██    ",
+    "     ██▓▓▓▓██                                      ██    ██    ",
+    " ██████▓▓▓▓▓▓██████████████████████████████████████      ██████",
+    " ██░░░░░░▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      ░░░░░░██",
+    " ██▓▓▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒      ▒▒▒▒▒▒  ██",
+    " ██▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒      ░░▒▒▒▒    ██",
+    " ██░░▓▓▓▓▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒    ░░██",
+    " ██░░▓▓▓▓▓▓▓▓▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒        ░░██",
+    " ██░░▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒        ▒▒░░██",
+    " ██▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒░░▒▒▒▒▒▒    ▒▒▒▒        ▒▒▒▒  ██",
+    " ██▓▓▓▓▓▓▒▒▒▒▓▓▓▓▒▒▒▒▒▒▓▓▓▓▒▒▒▒░░▒▒▒▒    ▒▒▒▒▒▒    ▒▒▒▒      ██",
+    " ██░░▓▓▓▓▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▓▓▒▒▒▒░░▒▒    ░░▒▒  ▒▒  ░░▒▒      ░░██",
+    " ██▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▓▓▒▒▒▒▒▒▓▓    ▒▒  ▒▒▒▒    ▒▒▒▒▒▒      ▒▒  ██",
+    " ██▓▓▓▓▒▒▓▓▓▓▓▓▒▒▒▒▓▓▓▓▓▓▒▒      ▒▒▒▒▒▒      ▒▒▒▒      ▒▒    ██",
+    " ██░░▓▓▓▓▒▒▒▒▓▓▒▒▓▓▒▒▒▒▓▓        ▒▒▒▒    ▒▒▒▒  ▒▒  ▒▒▒▒    ░░██",
+    " ██░░▓▓▓▓▓▓▓▓▒▒▒▒▓▓▒▒▒▒      ░░░░▒▒▒▒  ░░▒▒    ▒▒▒▒        ░░██",
+    " ██░░▒▒▓▓▓▓▓▓▓▓▒▒▒▒▓▓▓▓    ▒▒▒▒░░  ▒▒▒▒▒▒    ▒▒▒▒        ▒▒░░██",
+    " ██░░░░░░▓▓▓▓▓▓░░░░░░▓▓  ░░░░      ░░      ░░░░░░      ░░░░░░██",
+    " ██░░▒▒▒▒▒▒▓▓▓▓░░▒▒▒▒▒▒▒▒▒▒      ░░▒▒    ░░    ▒▒    ░░▒▒▒▒░░██",
+    " ██░░▓▓▓▓▒▒▒▒▓▓▒▒▓▓▓▓▓▓▒▒    ▒▒░░  ▒▒▒▒▒▒      ▒▒  ▒▒▒▒    ░░██",
+    " ██░░▒▒▓▓▓▓▓▓▒▒▒▒▒▒▓▓▓▓    ▒▒      ▒▒▒▒      ▒▒▒▒▒▒      ▒▒░░██",
+    " ██░░▒▒▓▓▓▓▓▓▓▓▒▒▓▓▒▒▓▓  ▒▒      ▒▒▒▒      ▒▒  ▒▒        ▒▒░░██",
+    " ██░░▒▒▒▒▒▒▓▓▓▓▒▒▓▓▓▓▒▒▒▒    ▒▒░░  ▒▒    ▒▒    ▒▒    ▒▒▒▒▒▒░░██",
+    " ██░░▒▒▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒  ▒▒      ▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒  ▒▒░░██",
+    " ██░░▒▒▓▓▓▓▓▓▓▓▒▒▒▒▒▒▓▓  ▒▒      ▒▒▒▒      ▒▒▒▒▒▒        ▒▒░░██",
+    " ██░░▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░    ▒▒░░▒▒▒▒    ░░▒▒  ▒▒      ▒▒▒▒░░██",
+    " ██░░▒▒▒▒▒▒▒▒▓▓▒▒▓▓▓▓▓▓▒▒  ▒▒      ▒▒▒▒▒▒      ▒▒  ▒▒▒▒▒▒▒▒░░██",
+    " ██░░▒▒▒▒▓▓▓▓▒▒▒▒▒▒▓▓▓▓  ▒▒      ▒▒▒▒        ▒▒▒▒▒▒    ▒▒▒▒░░██",
+    " ██░░▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒░░  ▒▒▒▒░░▒▒▒▒    ░░▒▒▒▒      ░░▒▒▒▒░░██",
+    " ██░░▒▒▒▒▒▒▒▒▓▓▓▓▒▒▓▓▓▓  ▒▒▒▒      ▒▒▒▒▒▒    ▒▒    ▒▒▒▒▒▒▒▒░░██",
+    " ██░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒▒▒▒  ▒▒░░▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░██",
+    " ██░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒    ▒▒    ░░▒▒▒▒      ▒▒▒▒▒▒▒▒░░██",
+    " ██░░░░▒▒▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒      ░░▒▒▒▒      ▒▒    ▒▒▒▒▒▒▒▒░░░░██",
+    " ██████░░░░▒▒▒▒▒▒▓▓▒▒▒▒    ▒▒▒▒░░        ▒▒▒▒  ▒▒▒▒▒▒░░░░██████",
+    "       ████░░░░▒▒▒▒▒▒    ░░          ▒▒░░▒▒▒▒▒▒▒▒░░░░████      ",
+    "           ████░░░░▒▒      ▒▒    ▒▒▒▒▓▓▓▓▓▓▒▒░░░░████          ",
+    "               ██      ▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▓▓▓▓▓▓██              ",
+    "             ██    ████░░░░▒▒▒▒░░▒▒▒▒░░░░████▓▓▓▓██            ",
+    "           ██    ██    ████░░░░░░░░░░████    ██▓▓▓▓██          ",
+    "         ████████          ████░░████          ████████        ",
+}
+db.setup({
+    config = {
+        header = conf.header,
+        -- center = conf.custom_center,
+        center = conf.custom_center,
+        -- shortcut = {},
+        project = { enable = false },
+        packages = { enable = false },
+        desc = '',
+        footer = {},
+        preview_file_width = 70,
+        preview_file_height = 11
+    }
+})
+-- temporary
+--
 -- Declare the vim global (for LSP)
 _G.vim = vim
 
@@ -351,3 +456,5 @@ cmp.setup.cmdline(":", {
 		{ name = "cmdline" }
 	}
 })
+--
+-- end temporary

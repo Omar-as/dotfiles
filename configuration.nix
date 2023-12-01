@@ -9,12 +9,13 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./kumech.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  #boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -26,7 +27,7 @@
   programs.fish.enable = true;
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Istanbul";
@@ -41,8 +42,8 @@
   services.upower = {
     enable = true;
     usePercentageForPolicy = true;
-    percentageLow = 40;
-    percentageCritical = 20;
+    percentageLow = 20;
+    percentageCritical = 15;
     percentageAction = 10;
     criticalPowerAction = "Hibernate";
   };
@@ -59,6 +60,20 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  # hardware.bluetooth.package = pkgs.bluezFull;
+
+  # fixing audio by overriding pins as suggested in
+  # https://www.reddit.com/r/ASUS/comments/mfokva/asus_strix_scar_17_g733qs_and_linux/
+  hardware.firmware = [
+    (pkgs.runCommand "jack-retask" { } ''
+      install -D ${./hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
+    '')
+  ];
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel patch=hda-jack-retask.fw
+  '';
 
   # Enable sound with pipewire.
   sound.enable = true;
