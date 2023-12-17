@@ -79,5 +79,9 @@
     gparted
     ripgrep
     joplin-desktop
+    android-studio
+    tmux
+    qbittorrent
+    syncplay
   ];
 }
