@@ -31,6 +31,9 @@
 	    lualine-nvim
 	    #indent-blankline-nvim
 	    nvim-web-devicons
+
+        # TODO comments
+        todo-comments-nvim
 	    # (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
 	    (pkgs.fetchFromGitHub {
 	      owner = "xiyaowong";

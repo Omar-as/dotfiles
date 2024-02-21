@@ -56,32 +56,25 @@
     git
     discord
     jetbrains.idea-ultimate
-    racket
     jetbrains.pycharm-professional
     gnome.gnome-tweaks
     gnome-extension-manager
     alacritty
-    gimp
     openconnect
     vlc
     sshfs
     firefox
     unzip
-    pdftk
     obs-studio
     vscode
     brave
     spotify
-    pstree
     fd
-    kdenlive
-    glaxnimate
     gparted
     ripgrep
-    joplin-desktop
-    android-studio
     tmux
     qbittorrent
     syncplay
+    telegram-desktop
   ];
 }
