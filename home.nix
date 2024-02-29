@@ -6,7 +6,7 @@
 
   imports = [
     ./git/git.nix
-    ./nvim/nvim.nix
+    ./nvim
     ./fish/fish.nix
   ];
 

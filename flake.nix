@@ -4,13 +4,16 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
-  }: let
+
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -23,6 +26,7 @@
       name = "Omar Al Asaad";
       email = "omarelassaad93@gmail.com";
       username = "omar";
+      editor = "nvim";
     };
   in {
     nixosConfigurations = {
@@ -36,8 +40,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.omar = {
-              imports = [./home.nix];
-              _module.args = {inherit params;};
+              imports = [./home.nix inputs.nixvim.homeManagerModules.nixvim ];
+              _module.args = {inherit params; inputs = self.inputs;};
             };
           }
         ];
