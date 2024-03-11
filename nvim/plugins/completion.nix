@@ -1,5 +1,5 @@
 {...}: {
-  programs.nixvim.plugins.nvim-cmp = {
+  programs.nixvim.plugins.cmp.settings = {
     enable = true;
     completion = {
       autocomplete = ["TextChanged"];

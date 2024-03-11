@@ -8,6 +8,7 @@
     ./git/git.nix
     ./nvim
     ./fish/fish.nix
+    ./emacs
   ];
 
   home.username = "omar";

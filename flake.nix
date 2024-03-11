@@ -2,9 +2,18 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    nixvim.url = "github:nix-community/nixvim";
+    nixpkgs.url         = "github:nixos/nixpkgs/nixpkgs-unstable";
+    home-manager.url    = "github:nix-community/home-manager";
+    nixvim.url          = "github:nix-community/nixvim";
+
+    # Doom-Emacs Packaged For Nix
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
+    nix-doom-emacs.inputs.nix-straight.follows = "nix-straight";
+    nix-straight = {
+      url = "github:codingkoi/nix-straight.el?ref=codingkoi/apply-librephoenixs-fix";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -40,7 +49,13 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.omar = {
-              imports = [./home.nix inputs.nixvim.homeManagerModules.nixvim ];
+              imports = [
+
+              ./home.nix 
+              inputs.nixvim.homeManagerModules.nixvim 
+              inputs.nix-doom-emacs.hmModule
+
+              ];
               _module.args = {inherit params; inputs = self.inputs;};
             };
           }
