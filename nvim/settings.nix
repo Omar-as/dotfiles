@@ -1,6 +1,6 @@
 {...}: {
   programs.nixvim = {
-    options = {
+    opts = {
       # Hybrid Line Numbers
       relativenumber = true; # Relative line numbers
       number = true; # Show current line number

@@ -41,7 +41,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/second-brain/")
-(setq org-agenda-files '("~/second-brain/" "~/second-brain/daily/")
+(setq org-agenda-files '("~/second-brain/" "~/second-brain/daily/"))
 (setq org-roam-directory "~/second-brain/")
 (setq org-roam-dailies-directory "daily")
 
@@ -59,6 +59,16 @@
 
 (after! org
   (setq org-log-into-drawer "LOGBOOK"))
+
+(defun my/org-id-update-org-roam-files ()
+  "Update Org-ID locations for all Org-roam files."
+  (interactive)
+  (org-id-update-id-locations (org-roam--list-all-files)))
+
+(defun my/org-id-update-id-current-file ()
+  "Scan the current buffer for Org-ID locations and update them."
+  (interactive)
+  (org-id-update-id-locations (list (buffer-file-name (current-buffer)))))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

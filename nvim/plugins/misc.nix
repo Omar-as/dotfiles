@@ -7,10 +7,10 @@
         globalstatus = true;
         iconsEnabled = true;
       };
-      comment-nvim.enable = true;
+      comment.enable = true;
       gitsigns = {
         enable = true;
-        currentLineBlame = true;
+        settings.current_line_blame = true;
       };
       todo-comments = {
         enable = true;

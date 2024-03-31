@@ -9,8 +9,8 @@
     ts-context-commentstring.enable = true;
     indent-blankline = {
       enable = true;
-      scope.enabled = true;
-      exclude.buftypes = ["terminal" "nofile" "quickfix" "prompt" "help"];
+      settings.scope.enabled = true;
+      settings.exclude.buftypes = ["terminal" "nofile" "quickfix" "prompt" "help"];
     };
     nvim-autopairs = {
       enable = true;
