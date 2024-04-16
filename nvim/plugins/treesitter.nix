@@ -14,9 +14,9 @@
     };
     nvim-autopairs = {
       enable = true;
-      checkTs = true;
-      disableInMacro = true;
-      disableInVisualblock = true;
+      settings.check_ts = true;
+      settings.disable_in_macro = true;
+      settings.disable_in_visualblock = true;
     };
     ts-autotag.enable = true;
   };

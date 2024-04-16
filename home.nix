@@ -77,5 +77,6 @@
     qbittorrent
     syncplay
     telegram-desktop
+    tree
   ];
 }

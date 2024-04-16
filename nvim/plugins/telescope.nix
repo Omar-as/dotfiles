@@ -3,7 +3,7 @@
     plugins = {
       telescope = {
         enable = true;
-        extraOptions = {
+        settings = {
           defaults = {
             sorting_strategy = "ascending";
             layout_config.prompt_position = "top";

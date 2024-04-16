@@ -9,7 +9,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./kumech.nix
   ];
 
   # Bootloader.
@@ -60,20 +59,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  # hardware.bluetooth.package = pkgs.bluezFull;
-
-  # fixing audio by overriding pins as suggested in
-  # https://www.reddit.com/r/ASUS/comments/mfokva/asus_strix_scar_17_g733qs_and_linux/
-  hardware.firmware = [
-    (pkgs.runCommand "jack-retask" { } ''
-      install -D ${./hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
-    '')
-  ];
-  boot.extraModprobeConfig = ''
-    options snd-hda-intel patch=hda-jack-retask.fw
-  '';
 
   # Enable sound with pipewire.
   sound.enable = true;
