@@ -78,5 +78,6 @@
     syncplay
     telegram-desktop
     tree
+    qemu
   ];
 }
