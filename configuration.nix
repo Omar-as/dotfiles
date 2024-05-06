@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
 
     ./virt-manager/virt-manager.nix
+    ./docker/docker.nix
   ];
 
   # Bootloader.
