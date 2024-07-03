@@ -79,5 +79,6 @@
     telegram-desktop
     tree
     qemu
+    obsidian
   ];
 }
