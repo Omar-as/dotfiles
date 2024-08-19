@@ -14,7 +14,7 @@
       };
       todo-comments = {
         enable = true;
-        signs = false;
+        settings.signs = false;
       };
       vim-matchup = {
         enable = true;
