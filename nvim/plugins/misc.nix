@@ -1,11 +1,13 @@
 {pkgs, ...}: {
   programs.nixvim = {
     plugins = {
-      surround.enable = true;
+      vim-surround.enable = true;
       lualine = {
         enable = true;
-        globalstatus = true;
-        iconsEnabled = true;
+        settings.options = {
+          globalstatus = true;
+          icons_enabled = true;
+        };
       };
       comment.enable = true;
       gitsigns = {

@@ -8,7 +8,7 @@
     ./git/git.nix
     ./nvim
     ./fish/fish.nix
-    ./emacs
+    # ./emacs
   ];
 
   home.username = "omar";
@@ -58,7 +58,7 @@
     discord
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnome-extension-manager
     alacritty
     openconnect
