@@ -2,9 +2,9 @@
   programs.nixvim.plugins.lsp = {
     enable = true;
     servers = {
-      lua-ls.enable = true;
+      lua_ls.enable = true;
       pyright.enable = true;
-      nil-ls.enable = true;
+      nil_ls.enable = true;
       # html.enable = true;
       # cssls.enable = true;
       # jsonls.enable = true;

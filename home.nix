@@ -80,5 +80,6 @@
     tree
     qemu
     obsidian
+    thunderbird
   ];
 }

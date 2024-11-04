@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   programs.nixvim = {
     plugins = {
+      web-devicons.enable = true;
       vim-surround.enable = true;
       lualine = {
         enable = true;
