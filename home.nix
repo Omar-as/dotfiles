@@ -1,14 +1,11 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
 
   imports = [
-    ./git/git.nix
-    ./nvim
-    ./fish/fish.nix
-    # ./emacs
+    ./modules/home-manager/git/git.nix
+    ./modules/home-manager/nvim
+    ./modules/home-manager/fish/fish.nix
+
+    # ./modules/home-manager/emacs
   ];
 
   home.username = "omar";
