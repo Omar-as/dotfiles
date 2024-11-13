@@ -1,9 +1,12 @@
 {pkgs, ...}: {
 
   imports = [
+
     ./modules/home-manager/git/git.nix
     ./modules/home-manager/nvim
     ./modules/home-manager/fish/fish.nix
+
+    # ./modules/home-manager/kitty.nix
 
     # ./modules/home-manager/emacs
   ];
@@ -47,7 +50,6 @@
     vim
     wget
     google-chrome
-    kitty
     libreoffice
     zoom-us
     slack
@@ -78,5 +80,6 @@
     qemu
     obsidian
     thunderbird
+    kitty
   ];
 }

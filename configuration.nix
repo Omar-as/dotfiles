@@ -11,6 +11,9 @@
 
     ./virt-manager/virt-manager.nix
     ./docker/docker.nix
+
+    ./modules/nixos/nix-index.nix
+    ./modules/nixos/fish.nix
   ];
 
   # Bootloader.
@@ -25,13 +28,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  programs.fish.enable = true;
+  # programs.fish.enable = true;
 
   # Enable networking
   # networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Istanbul";
+  # # Set your time zone.
+  # time.timeZone = "Europe/Istanbul";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
@@ -127,7 +130,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.05";
 
   nix.gc = {
     automatic = true;
