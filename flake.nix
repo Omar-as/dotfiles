@@ -53,9 +53,6 @@
         shell = "fish";
         terminal = "kitty";
         theme = "ayu-dark";
-        colorScheme = {
-          slug = "ayu-dark";
-        };
       };
     in {
       # NixOS configuration entrypoint with Home Manager included
