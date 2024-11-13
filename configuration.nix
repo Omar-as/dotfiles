@@ -13,6 +13,7 @@
     ./modules/nixos/fish.nix
     ./modules/nixos/core.nix
     ./modules/nixos/power.nix
+    ./modules/nixos/nix.nix
   ];
 
   # Bootloader.
@@ -71,11 +72,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  nix = {
-    package = pkgs.nixVersions.stable;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -95,9 +91,4 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 90d";
-  };
 }
