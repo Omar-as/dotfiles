@@ -1,4 +1,4 @@
-{ ... }: 
+{pkgs, ... }: 
   let
     # Define shell aliases for convenience
     shellAliases = {
@@ -7,11 +7,11 @@
       flake-update = "nix flake update";
       basic-flake = "nix flake new -t github:nix-community/nix-direnv .";
     };
-	
   in {
+
   programs.fish = {
     enable = true;
-	inherit shellAliases;
+    inherit shellAliases;
 
     shellInit = ''
       # Define TokyoNight Color Palette
@@ -49,13 +49,25 @@
       set -g fish_pager_color_description $comment
       set -g fish_pager_color_selected_background --background=$selection
 
-	  # Enable default (emacs) mode (Not Vi Controls)
-	  fish_default_key_bindings
+      # Enable default (emacs) mode (Not Vi Controls)
+      fish_default_key_bindings
     '';
   };
 
-	programs.bash = {
-        enable = true;
-		inherit shellAliases;
-	};
+  programs.bash = {
+    enable = true;
+    inherit shellAliases;
+    };
+
+  home.packages = with pkgs; [
+
+    btop
+    wget
+    sshfs
+
+    zip # Zip Compression
+    unzip # Zip Decompression
+    tree # List directory contents in a tree-like format
+    fd # Find Clone
+  ];
 }

@@ -46,7 +46,7 @@
         username = "omar";
         name = "Omar Al Asaad";
         email = "omarelassaad93@gmail.com";
-        state-version = "23.05";
+        state-version = "22.05";
         editor = "nvim";
         browser = "brave";
         timezone = "Asia/Riyadh";
