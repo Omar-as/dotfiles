@@ -4,9 +4,8 @@
 
     ./modules/home-manager/git/git.nix
     ./modules/home-manager/nvim
-    ./modules/home-manager/fish/fish.nix
-
-    # ./modules/home-manager/kitty.nix
+    ./modules/home-manager/shell.nix
+    ./modules/home-manager/kitty.nix
 
     # ./modules/home-manager/emacs
   ];
@@ -75,11 +74,7 @@
     tmux
     qbittorrent
     syncplay
-    telegram-desktop
     tree
     qemu
-    obsidian
-    thunderbird
-    kitty
   ];
 }
